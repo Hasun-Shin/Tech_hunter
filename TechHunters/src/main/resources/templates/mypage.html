@@ -3,12 +3,191 @@
   <meta charset="utf-8">
 <head th:replace="common/head">
 </head>
+<br><br><br>
 
-<body id="page-top">
+<table>
+      <thead>
+        <tr>
+          <th>CODE</th>
+          <th>STOCK</th>
+          <th>CAP</th>
+          <th>INCH</th>
+          <th>BOX TYPE</th>
+        </tr>
+      <thead>
+      <tbody>
+        <tr>
+          <td>CES-9000</td>
+          <td>50mt</td>
+          <td>9mm</td>
+          <td>1/2"</td>
+          <td>Kangal / Coil</td>
+        </tr>
+           <tr>
+          <td>CES-9000</td>
+          <td>50mt</td>
+          <td>9mm</td>
+          <td>1/2"</td>
+          <td>Kangal / Coil</td>
+        </tr>
+           <tr>
+          <td>CES-9000</td>
+          <td>50mt</td>
+          <td>9mm</td>
+          <td>1/2"</td>
+          <td>Kangal / Coil</td>
+        </tr>
+           <tr>
+          <td>CES-9000</td>
+          <td>50mt</td>
+          <td>9mm</td>
+          <td>1/2"</td>
+          <td>Kangal / Coil</td>
+        </tr>
+      </tbody>
+    <table/>
+      
+    <blockquote> Responsive Table </blockquote>
 
- 	<nav th:replace="common/nav"></nav>
+<style>
+// sets
 
-<!-- 마이페이지 우앵우ㅐ애애 -->
+$gl-ms         : "screen and (max-width: 23.5em)"; // up to 360px
+$gl-xs         : "screen and (max-width: 35.5em)"; // up to 568px
+$gl-sm         : "screen and (max-width: 48em)";   // max 768px
+$gl-md         : "screen and (max-width: 64em)";   // max 1024px
+$gl-lg         : "screen and (max-width: 80em)";   // max 1280px
+
+// table style
+
+table 			      { 
+  border-spacing: 1; 
+  border-collapse: collapse; 
+  background:white;
+  border-radius:6px;
+  overflow:hidden;
+  max-width:800px; 
+  width:100%;
+  margin:0 auto;
+  position:relative;
+  
+  *               { position:relative }
+  
+  td,th           { padding-left:8px}
+
+  thead tr        { 
+    height:60px;
+    background:#FFED86;
+    font-size:16px;
+  }
+  
+  tbody tr        { height:48px; border-bottom:1px solid #E3F1D5 ;
+    &:last-child  { border:0; }
+  }
+  
+ 	td,th 					{ text-align:left;
+		&.l 					{ text-align:right }
+		&.c 					{ text-align:center }
+		&.r 					{ text-align:center }
+	}
+}
+
+
+@media #{$gl-xs}              {
+  
+  table					              { display:block;
+	  > *,tr,td,th              { display:block }
+    
+    thead                     { display:none }
+    tbody tr                  { height:auto; padding:8px 0;
+      td                      { padding-left:45%; margin-bottom:12px;
+        &:last-child          { margin-bottom:0 }
+        &:before              { 
+          position:absolute;
+          font-weight:700;
+          width:40%;
+          left:10px;
+          top:0
+        }
+        
+        &:nth-child(1):before { content:"Code";}
+        &:nth-child(2):before { content:"Stock";}
+        &:nth-child(3):before { content:"Cap";}
+        &:nth-child(4):before { content:"Inch";}
+        &:nth-child(5):before { content:"Box Type";}
+      }        
+    }
+  }
+}  	
+
+
+
+
+// body style
+
+body               { 
+  background:#9BC86A; 
+  font:400 14px 'Calibri','Arial';
+  padding:20px;
+}
+
+blockquote {
+  color:white;
+  text-align:center;
+}</style>
+
+
+
+
+
+
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script th:inline="javascript">
+/* <![CDATA[ */   
+$.ajax({
+         url : '/test',
+         type : 'get',
+         data : {'sentence' : $('3sentence').val()},
+         success : function(res) {
+//         	 for(var i = 0; i < res.length; i++) {
+        	 for(var i in res) {
+        			 
+        		 var obj = res[i];
+	        	 var email = obj.email;
+	        	 var title = obj.title;
+	        	 var link = obj.link;
+	        	 var preview = obj.preview;
+	        	
+	        	/*  var email = JSON.stringify(email); */
+
+	        	 
+        		// if(email == /*[[${session.user_info.email}]]*/){
+	        	  
+        			 $("#newslist").append('<div class="col-lg-3 col-md-6 mb-4"><div class="card h-100"><div class="card-body"><h4 class="card-title"><a href="' + link + '">' + title + '</a></h4><p class="card-text">'+ preview + '</p></div><div class="card-footer"><input type="button" class="btn btn-primary scrapx" value="취소!" Onclick="test();"></a></div></div>')  
+        	  } 
+        		 $(".scrapx").click(function() {
+ 					alert("취소 되었습니다.");
+ 					var title = $(this).parent().prev().find('a').text();
+ 					var link = $(this).parent().prev().find('a').attr('href');
+ 					var preview = $(this).parent().prev().find('p').text();
+ 					console.log(title, link, preview)
+ 					$.ajax({
+ 						url: 'test',
+ 						type: 'delete',
+ 						data: {title: title, link: link, preview: preview},
+ 						success: function(result) {
+ 						}
+ 					})
+ 					return false;
+        			});
+             }
+             
+             
+             
+          })
+
+/* ]]> */
+</script>
 
   <footer th:replace="common/footer"></footer>
   

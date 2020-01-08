@@ -1,21 +1,22 @@
 package com.th.TechHunters.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import lombok.Data;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Document("user_db")
+@Getter
+@Setter
 public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+@Id
+	private ObjectId _id;
 	private String email;
 	private String pwd;
 	private String name;
-	private String sex;
 	
 }
 

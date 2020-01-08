@@ -9,5 +9,12 @@ public class HomeController {
 	public String index() {
 		return "index";
 	}
-	
+@Controller
+public class FeatureController {
+	@GetMapping({ "/feature" })
+	public String feature() {
+			return "feature";
+		}
+}
+
 }

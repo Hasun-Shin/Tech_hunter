@@ -11,11 +11,11 @@ import lombok.Setter;
 @Document("news_db")
 @Getter
 @Setter
-public class News {
+public class AiNews {
 	
 	@Id
 	private ObjectId _id;
-	private String img;
 	private String title;
 	private String link;
+	private String preview;
 }

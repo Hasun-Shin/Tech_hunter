@@ -21,17 +21,21 @@
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="/bigdatanews">BigData</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="/etcnews">ETC</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="/mypage">MyPage</a></li>
+					href="/conference">Conference</a></li>
 			</ul>
+			<ul class="navbar-nav text-uppercase ml-auto">
+				<li class="nav-item"th:if="${session.user_info} != null"><a class="nav-link js-scroll-trigger"
+					href="/mypage">MyPage</a></li>
+				<li class="nav-item"th:if="${session.user_info} == null"><a class="nav-link js-scroll-trigger"
+					href="/signin">MyPage</a></li>
+					</ul>
 			<ul class="navbar-nav text-uppercase ml-auto">
 				<li class="nav-item" th:if="${session.user_info} == null"><a
 					class="nav-link js-scroll-trigger" href="/signin">Sign in</a>
 				<li class="nav-item" th:if="${session.user_info} != null"><a
-					class="nav-link" style="color: white"> [['Welcome! '+
+					class="nav-link" style="color: white; display: inline;"> [['Welcome! '+
 						${session.user_info.name} + ' 님']] </a> <a
-					class="nav-link js-scroll-trigger" href="/signout"> Sign out</a></li>
+					class="nav-link js-scroll-trigger" href="/signout" style="display: inline;"> Sign out</a></li>
 			</ul>
 		</div>
 	</div>

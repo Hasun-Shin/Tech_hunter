@@ -26,10 +26,13 @@ public class UserController {
 	@PostMapping("/mypage")
 	public String mypagePost(@ModelAttribute User user) {
 		User dbUser = userRepository.findByEmailAndPwd(user.getEmail(), user.getPwd());
+		if (dbUser == null) {
+			return "signin";
+		}
 		if (dbUser != null) {
 			session.setAttribute("user_info", dbUser);
 		}
-		return "/signin";
+		return "mypage";
 	}
 	
 	@GetMapping("/signout")
@@ -62,4 +65,5 @@ public class UserController {
 		userRepository.save(user);
 		return "redirect:/";
 	}
+	
 }

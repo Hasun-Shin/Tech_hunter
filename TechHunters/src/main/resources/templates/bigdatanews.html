@@ -6,8 +6,63 @@
 
 <body id="page-top">
 
- 	<nav th:replace="common/nav"></nav>
+ 	<nav th:replace="common/newsnav"></nav>
+<hr>
 
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3" id="bigtitle"></h1>
+       <img class="img-fluid" src="img/portfolio/bigdataa.jpg" alt="">
+      <p class="lead" id="bigimage"></p>
+      <a href="/mypage" class="btn btn-primary btn-lg">My Scrap Book!</a>
+    </header>
+    
+        <div class="row text-center" id="newslist">
+
+      </div>
+
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+      $.ajax({
+         url : '/bigdatalist',
+         type : 'get',
+         data : {'sentence' : $('3sentence').val()},
+         success : function(res) {
+//         	 for(var i = 0; i < res.length; i++) {
+        	 for(var i in res) {
+        		 var obj = res[i];
+	        	 var preview = obj.preview;
+	        	 var title = obj.title;
+	        	 var link = obj.link;
+	        	 
+	        		$("#newslist").append('<div class="col-lg-3 col-md-6 mb-4"><div class="card h-100"><div class="card-body"><h4 class="card-title"><a href="' + link + '">' + title + '</a></h4><p class="card-text">'+ preview + '</p></div><div class="card-footer"><input type="button" class="btn btn-primary scrap" value="Scrap!" Onclick="test();"></a></div></div>') 
+        	 }
+        	 $(".scrap").click(function() {
+					alert("스크랩 되었습니다.");
+					var title = $(this).parent().prev().find('a').text();
+					var link = $(this).parent().prev().find('a').attr('href');
+					var preview = $(this).parent().prev().find('p').text();
+					console.log(title, link, preview)
+					$.ajax({
+						url: 'test',
+						type: 'post',
+						data: {title: title, link: link, preview: preview},
+						success: function(result) {
+						}
+					})
+					return false;
+				});
+         }
+         
+         
+         
+      })
+
+
+</script>
 
   <footer th:replace="common/footer"></footer>
   
